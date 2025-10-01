@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nayana Pabasara - Portfolio</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <div class="crosshair">
+                        <div class="crosshair-center"></div>
+                        <div class="crosshair-dot crosshair-dot-1"></div>
+                        <div class="crosshair-dot crosshair-dot-2"></div>
+                        <div class="crosshair-dot crosshair-dot-3"></div>
+                        <div class="crosshair-dot crosshair-dot-4"></div>
+                    </div>
+                </div>
+                <div class="logo-text-container">
+                    <span class="logo-text">Nayana Pabasara</span>
+                    <span class="logo-title">Automation Engineer</span>
+                </div>
+            </a>
+            
+            <nav class="navbar">
+                <a href="#home" class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+                <div class="dropdown">
+                    <a href="#about" class="dropdown-toggle">
+                        <i class="fa-solid fa-user"></i>
+                        <span>About</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#about">
+                            <i class="fa-solid fa-user"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#experience">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <span>Experience</span>
+                        </a>
+                        <a href="#education">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Education</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#skills">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Skills</span>
+                </a>
+                <a href="#services">
+                    <i class="fa-solid fa-cogs"></i>
+                    <span>Services</span>
+                </a>
+                <a href="#portfolio">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>Projects</span>
+                </a>
+            </nav>
+        </div>
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
+    </header>
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1><span class="hello-text">Hello, I'm</span> <span class="text-gradient">Nayana Pabasara</span></h1>
+            <h3 class="typing-text">Engineering Technology Student</h3>
+            <p>Specializing in Instrumentation & Automation Technology with expertise in web development, machine learning, and innovative engineering solutions.</p>
+            
+            <div class="tech-stack">
+                <span class="tech-item">Web Development</span>
+                <span class="tech-item">Machine Learning</span>
+                <span class="tech-item">App Development</span>
+                <span class="tech-item">UI/UX Design</span>
+                <span class="tech-item">FPGA Programming</span>
+                <span class="tech-item">PLC Programming</span>
+                <span class="tech-item">LabVIEW</span>
+                <span class="tech-item">IoT Development</span>
+                <span class="tech-item">Embedded Systems</span>
+                <span class="tech-item">SolidWorks Design</span>
+            </div>
+            
+            <div class="social-media">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/napi-9046392b3/"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/nayanapabasara" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+            </div>
+            
+            <div class="btn-group">
+                <a href="https://drive.google.com/file/d/1s_-KAMWqMP0KbDUPPugwS2ECdx5ePFN5/view" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download CV</a>
+                <a href="#portfolio" class="btn btn-secondary">View Portfolio</a>
+            </div>
+        </div>
+        
+        <div class="home-img">
+            <div class="img-container">
+                <img src="pro.png" alt="Nayana Pabasara">
+                <div class="floating-elements">
+                    <div class="floating-icon" data-tooltip="Mobile Apps"><i class="fa-solid fa-mobile-alt"></i></div>
+                    <div class="floating-icon" data-tooltip="3D Design"><i class="fa-solid fa-cube"></i></div>
+                    <div class="floating-icon" data-tooltip="UI/UX Design"><i class="fa-solid fa-palette"></i></div>
+                    <div class="floating-icon" data-tooltip="PLC Automation"><i class="fa-solid fa-cogs"></i></div>
+                    <div class="floating-icon" data-tooltip="Embedded Systems"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="floating-icon" data-tooltip="IoT Development"><i class="fa-solid fa-wifi"></i></div>
+                    <div class="floating-icon engineer-icon" data-tooltip="Engineering">
+                        <div class="engineer-gear">
+                            <i class="fa-solid fa-cog"></i>
+                            <i class="fa-solid fa-wrench"></i>
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2 class="heading">About <span>Me</span></h2>
+            <h3>Passionate Engineering Technology Student</h3>
+            <p>I am a passionate and skilled engineer pursuing a Bachelor of Engineering Technology with Honours in Instrumentation and Automation at the University of Colombo. With a strong foundation in automation and a diverse technical skill set, including web development, machine learning, database management, app development, UI/UX design, FPGA programming, PLC programming, IoT development, embedded systems, SolidWorks designing, and programming languages like Python, SQL, and Java, I bring a holistic approach to engineering solutions.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-content">
+                        <h3>5+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="90"></div>
+                    </div>
+                    <span class="progress-text">90%</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-content">
+                        <h3>3+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75"></div>
+                    </div>
+                    <span class="progress-text">75%</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-content">
+                        <h3>10+</h3>
+                        <p>Technologies Mastered</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                    <span class="progress-text">85%</span>
+                </div>
+            </div>
+            
+            <div class="expertise">
+                <div class="expertise-item">
+                    <i class="fa-solid fa-code"></i>
+                    <span>Web Development</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-mobile-alt"></i>
+                    <span>App Development</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>UI/UX Design</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>FPGA Programming</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-cogs"></i>
+                    <span>PLC Programming</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-project-diagram"></i>
+                    <span>LabVIEW</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-wifi"></i>
+                    <span>IoT Development</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Embedded Systems</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>SolidWorks Design</span>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="about-img">
+            <div class="img-wrapper">
+                <img src="pro2.png" alt="About Nayana">
+                <div class="img-decoration">
+                    <div class="decoration-circle circle-1"></div>
+                    <div class="decoration-circle circle-2"></div>
+                    <div class="decoration-circle circle-3"></div>
+                </div>
+            </div>
+            
+            <div class="soft-skills">
+                <div class="circular-progress-container">
+                    <div class="circular-progress">
+                        <div class="progress-circle" data-percentage="90">
+                            <div class="progress-value">90%</div>
+                        </div>
+                        <div class="skill-name">Team Work</div>
+                    </div>
+                    <div class="circular-progress">
+                        <div class="progress-circle" data-percentage="85">
+                            <div class="progress-value">85%</div>
+                        </div>
+                        <div class="skill-name">Time Management</div>
+                    </div>
+                    <div class="circular-progress">
+                        <div class="progress-circle" data-percentage="80">
+                            <div class="progress-value">80%</div>
+                        </div>
+                        <div class="skill-name">Leadership</div>
+                    </div>
+                    <div class="circular-progress">
+                        <div class="progress-circle" data-percentage="88">
+                            <div class="progress-value">88%</div>
+                        </div>
+                        <div class="skill-name">Verbal & Written</div>
+                    </div>
+                    <div class="circular-progress">
+                        <div class="progress-circle" data-percentage="92">
+                            <div class="progress-value">92%</div>
+                        </div>
+                        <div class="skill-name">Active Listening</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section class="experience" id="experience">
+        <h2 class="heading">Work <span>Experience</span></h2>
+        <p class="section-subtitle">Professional journey and career milestones</p>
+        
+        <div class="experience-container">
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div class="experience-content">
+                    <h3>Training Assistant Manager</h3>
+                    <h4>Ebony Holdings (Pvt) Ltd</h4>
+                    <p class="experience-duration">2022 - 2023 (1 Year Experience)</p>
+                    <p class="experience-description">Managed training programs and assisted in organizational development initiatives.</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <h2 class="heading">Education & <span>Qualifications</span></h2>
+        <p class="section-subtitle">Academic achievements and professional certifications</p>
+        
+        <div class="education-container">
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="education-content">
+                    <h3>University Education</h3>
+                    <h4>Faculty of Technology, University of Colombo</h4>
+                    <p class="education-details">Bachelor of Engineering Technology Honours in Instrumentation and Automation (Reading)</p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+                <div class="education-content">
+                    <h3>2021 Advance Level</h3>
+                    <h4>Mayurapada C.C. Narammala</h4>
+                    <p class="education-details">
+                        Engineering Technology - A<br>
+                        Science for Technology - B<br>
+                        Information & Communication Technology - B
+                    </p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fa-solid fa-certificate"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Diploma in ICT</h3>
+                    <h4>ICBT Kurunegala Campus</h4>
+                    <p class="education-details">Comprehensive Information and Communication Technology diploma program</p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fa-solid fa-language"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Diploma in English</h3>
+                    <h4>ICBT Kurunegala Campus</h4>
+                    <p class="education-details">Advanced English language proficiency and communication skills</p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Diploma in ICT</h3>
+                    <h4>Yes Computer Institute</h4>
+                    <p class="education-details">Practical computer skills and information technology fundamentals</p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fa-solid fa-cogs"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Advanced Certificate Course</h3>
+                    <h4>Sri Lanka Institute of Robotics (SLIR)</h4>
+                    <p class="education-details">PLC Programming & Automation (2025)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="heading">Technical <span>Expertise</span></h2>
+        <p class="section-subtitle">Core competencies in engineering technology and software development</p>
+        
+        <div class="skills-container">
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>Programming Languages</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">PHP</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3>Web Development</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Responsive Design</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3>Data Science & ML</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Statistical Modeling</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-tools"></i>
+                </div>
+                <h3>Engineering Tools</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">AutoCAD</span>
+                    <span class="skill-tag">SolidWorks</span>
+                    <span class="skill-tag">Adobe Photoshop</span>
+                    <span class="skill-tag">MS Office</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <h3>Database Management</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Database Design</span>
+                    <span class="skill-tag">Data Modeling</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-project-diagram"></i>
+                </div>
+                <h3>Project Management</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Team Leadership</span>
+                    <span class="skill-tag">Time Management</span>
+                    <span class="skill-tag">Communication</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-mobile-alt"></i>
+                </div>
+                <h3>App Development</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Mobile Applications</span>
+                    <span class="skill-tag">Cross-Platform</span>
+                    <span class="skill-tag">User Interface</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+                <h3>SolidWorks Design</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">3D Modeling</span>
+                    <span class="skill-tag">CAD Design</span>
+                    <span class="skill-tag">Technical Drawings</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <h3>UI/UX Design</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">User Interface</span>
+                    <span class="skill-tag">User Experience</span>
+                    <span class="skill-tag">Prototyping</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3>Embedded Systems</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Microcontrollers</span>
+                    <span class="skill-tag">Hardware Design</span>
+                    <span class="skill-tag">Firmware Development</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-wifi"></i>
+                </div>
+                <h3>IoT Development</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Sensor Integration</span>
+                    <span class="skill-tag">Wireless Communication</span>
+                    <span class="skill-tag">Cloud Connectivity</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-cogs"></i>
+                </div>
+                <h3>Process Automation (PLC)</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Ladder Diagrams</span>
+                    <span class="skill-tag">PLC Programming</span>
+                    <span class="skill-tag">SCADA Systems</span>
+                    <span class="skill-tag">Industrial Protocols</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3>FPGA Programming</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">VHDL</span>
+                    <span class="skill-tag">Verilog</span>
+                    <span class="skill-tag">Digital Design</span>
+                    <span class="skill-tag">Hardware Implementation</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-project-diagram"></i>
+                </div>
+                <h3>Graphical Programming</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">LabVIEW</span>
+                    <span class="skill-tag">Data Acquisition</span>
+                    <span class="skill-tag">Instrument Control</span>
+                    <span class="skill-tag">Test Automation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="heading">Professional <span>Services</span></h2>
+        <p class="section-subtitle">Engineering and technology solutions</p>
+        
+        <div class="services-container">
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>Web Development</h3>
+                <p>Custom web applications, responsive design, and modern user interfaces using HTML, CSS, JavaScript, and PHP.</p>
+                <ul>
+                    <li>Frontend Development</li>
+                    <li>Backend Integration</li>
+                    <li>Responsive Design</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-drafting-compass"></i>
+                </div>
+                <h3>CAD Design & Modeling</h3>
+                <p>Professional 2D and 3D design services using AutoCAD and SolidWorks for engineering and manufacturing applications.</p>
+                <ul>
+                    <li>2D Drafting</li>
+                    <li>3D Modeling</li>
+                    <li>Technical Drawings</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile App Development</h3>
+                <p>Custom mobile application development for iOS and Android platforms with modern UI/UX design principles.</p>
+                <ul>
+                    <li>Cross-Platform Development</li>
+                    <li>User Interface Design</li>
+                    <li>App Store Deployment</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <h3>UI/UX Design</h3>
+                <p>Professional user interface and user experience design services for web and mobile applications.</p>
+                <ul>
+                    <li>Wireframing & Prototyping</li>
+                    <li>User Research</li>
+                    <li>Visual Design</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3>Embedded Systems Design</h3>
+                <p>Custom embedded system solutions including microcontroller programming, hardware design, and firmware development.</p>
+                <ul>
+                    <li>Microcontroller Programming</li>
+                    <li>Hardware Design</li>
+                    <li>Firmware Development</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-wifi"></i>
+                </div>
+                <h3>IoT Development</h3>
+                <p>End-to-end IoT solutions including sensor integration, wireless communication, and cloud connectivity.</p>
+                <ul>
+                    <li>Sensor Integration</li>
+                    <li>Wireless Protocols</li>
+                    <li>Cloud Connectivity</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-cogs"></i>
+                </div>
+                <h3>Process Automation (PLC)</h3>
+                <p>Industrial automation solutions including PLC programming, ladder diagram design, SCADA systems, and industrial protocols.</p>
+                <ul>
+                    <li>Ladder Diagram Design</li>
+                    <li>PLC Programming</li>
+                    <li>SCADA Systems</li>
+                    <li>Industrial Protocols</li>
+                </ul>
+            </div>
+            
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fa-solid fa-project-diagram"></i>
+                </div>
+                <h3>Graphical Programming (LabVIEW)</h3>
+                <p>Professional LabVIEW development for data acquisition, instrument control, and test automation systems.</p>
+                <ul>
+                    <li>LabVIEW Development</li>
+                    <li>Data Acquisition Systems</li>
+                    <li>Instrument Control</li>
+                    <li>Test Automation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="heading">Featured <span>Projects</span></h2>
+        <p class="section-subtitle">Innovative solutions and engineering projects</p>
+        
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="app">App Development</button>
+            <button class="filter-btn" data-filter="iot">IoT Systems</button>
+            <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
+        
+        <div class="portfolio-container">
+            <div class="portfolio-box" data-category="app">
+                <img src="hotel.png" alt="Hotel Management App">
+                <div class="portfolio-layer">
+                    <h4>Serandib Stay - Hotel Management System</h4>
+                    <p>Comprehensive hotel booking app with transport booking, food ordering, and Sri Lanka's most beautiful places tracking features.</p>
+                    <div class="tech-tags">
+                        <span>Mobile App</span>
+                        <span>Hotel Booking</span>
+                        <span>Transport</span>
+                        <span>Food Ordering</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="app">
+                <img src="gpa.jpg" alt="GPA Calculator App">
+                <div class="portfolio-layer">
+                    <h4>GPA Calculator App</h4>
+                    <p>University GPA calculator for Sri Lankan students with subject management, credit calculation, and semester-wise GPA tracking.</p>
+                    <div class="tech-tags">
+                        <span>Mobile App</span>
+                        <span>Calculator</span>
+                        <span>Education</span>
+                        <span>University</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="app">
+                <img src="food.png" alt="Food Ordering App">
+                <div class="portfolio-layer">
+                    <h4>Food Ordering App</h4>
+                    <p>Mobile food ordering application with restaurant selection, menu browsing, order tracking, and secure payment integration.</p>
+                    <div class="tech-tags">
+                        <span>Mobile App</span>
+                        <span>Food Delivery</span>
+                        <span>Order Tracking</span>
+                        <span>Payment</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="app">
+                <img src="smartgreen.jpg" alt="Smart Green App">
+                <div class="portfolio-layer">
+                    <h4>Smart Green - Greenhouse Monitoring</h4>
+                    <p>Smart greenhouse monitoring app with real-time sensor data (moisture, temperature, humidity, light, oxygen) and automated control systems.</p>
+                    <div class="tech-tags">
+                        <span>Mobile App</span>
+                        <span>IoT Monitoring</span>
+                        <span>Sensor Data</span>
+                        <span>Automation</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="iot">
+                <img src="SG.jpg" alt="Smart Greenhouse Project">
+                <div class="portfolio-layer">
+                    <h4>Smart Greenhouse Monitoring System</h4>
+                    <p>IoT-based greenhouse monitoring with real-time environmental data collection, automated control systems, and sensor integration.</p>
+                    <div class="tech-tags">
+                        <span>IoT</span>
+                        <span>Python</span>
+                        <span>Arduino</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="web">
+                <img src="e-mart.png" alt="Web Application">
+                <div class="portfolio-layer">
+                    <h4>E-Commerce Web Application</h4>
+                    <p>Full-stack e-commerce platform with user authentication, product management, shopping cart, and secure payment integration.</p>
+                    <div class="tech-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>PHP</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="automation">
+                <img src="pneumatic-sorting.jpg" alt="Pneumatic Sorting System">
+                <div class="portfolio-layer">
+                    <h4>Pneumatic Product Sorting System</h4>
+                    <p>Automated sorting system using Siemens PLC with 3 conveyor belts, 7 sensors, and pneumatic actuators for product detection and sorting.</p>
+                    <div class="tech-tags">
+                        <span>Siemens PLC</span>
+                        <span>Pneumatic</span>
+                        <span>Ladder Logic</span>
+                        <span>TIA Portal</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="automation">
+                <img src="elevator-system.jpg" alt="Elevator Control System">
+                <div class="portfolio-layer">
+                    <h4>Smart 3-Level Elevator Prototype</h4>
+                    <p>Elevator control system using S7-200 PLC with three floors, door interlocks, call prioritization, and queue-based scheduling for optimal performance.</p>
+                    <div class="tech-tags">
+                        <span>S7-200 PLC</span>
+                        <span>Ladder Logic</span>
+                        <span>Motion Control</span>
+                        <span>Safety Systems</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="automation">
+                <img src="water-treatment.jpg" alt="Water Treatment System">
+                <div class="portfolio-layer">
+                    <h4>Water Treatment & Bottle Filling System</h4>
+                    <p>Automated water treatment and bottle filling system using Siemens PLC with 3 sensors, pumps, and conveyor for continuous operation.</p>
+                    <div class="tech-tags">
+                        <span>S7-200 PLC</span>
+                        <span>TIA Portal</span>
+                        <span>Ladder Logic</span>
+                        <span>Process Control</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="iot">
+                <img src="line-following-robot.jpg" alt="Line Following Robot">
+                <div class="portfolio-layer">
+                    <h4>Line-Following Robot with Obstacle Detection</h4>
+                    <p>Intelligent robot using ATmega328P with IR sensors for line following, ultrasonic obstacle detection, and robotic arm for obstacle removal.</p>
+                    <div class="tech-tags">
+                        <span>ATmega328P</span>
+                        <span>Arduino IDE</span>
+                        <span>IR Sensors</span>
+                        <span>Ultrasonic Sensor</span>
+                        <span>Proteus</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="automation">
+                <img src="hand-forklift.jpg" alt="Hand Operated Forklift">
+                <div class="portfolio-layer">
+                    <h4>Hand-Operated Forklift Design</h4>
+                    <p>Robust forklift with 100-200 kg lifting capacity and 1-1.5m height using box bar and wood materials with CAD design and fabrication.</p>
+                    <div class="tech-tags">
+                        <span>CAD Design</span>
+                        <span>Mechanical Engineering</span>
+                        <span>Material Selection</span>
+                        <span>Fabrication</span>
+                        <span>Safety Design</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box" data-category="iot">
+                <img src="smart-home.png" alt="IoT Device">
+                <div class="portfolio-layer">
+                    <h4>Smart Home Control System</h4>
+                    <p>IoT-based home automation with mobile app control, sensor integration, and smart device management.</p>
+                    <div class="tech-tags">
+                        <span>IoT</span>
+                        <span>Mobile App</span>
+                        <span>Arduino</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/nayanapabasara" class="portfolio-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="portfolio-link"><i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Nayana Pabasara</h3>
+                <p>Engineering Technology Student | Automation & Web Development Enthusiast</p>
+                <p>Passionate about creating innovative solutions that make a difference in the world.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/napi-9046392b3/"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/nayanapabasara" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:nayanapabasara1@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Nayana Pabasara. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scroll-top">
+        <i class="fa-solid fa-angle-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
