@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Output configuration for GitHub Pages (static export)
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  trailingSlash: true,
   images: {
     remotePatterns: [
       {
