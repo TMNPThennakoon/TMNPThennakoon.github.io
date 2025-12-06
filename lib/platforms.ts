@@ -41,10 +41,13 @@ export const getPlatforms = async (): Promise<Platform[]> => {
   try {
     const { loadPlatformsFromGitHub } = await import('./githubSync');
     const result = await loadPlatformsFromGitHub();
-    if (result.success && result.platforms && result.platforms.length > 0) {
-      // Save to localStorage and return
-      localStorage.setItem('platforms', JSON.stringify(result.platforms));
-      return result.platforms;
+    if (result.success && result.platforms) {
+      // Always use GitHub data if available (even if empty array)
+      // This ensures cross-device sync works properly
+      if (result.platforms.length > 0 || localStorage.getItem('platforms')) {
+        localStorage.setItem('platforms', JSON.stringify(result.platforms));
+        return result.platforms;
+      }
     }
   } catch (error) {
     console.log('Loading platforms from GitHub failed, using localStorage:', error);
@@ -54,11 +57,17 @@ export const getPlatforms = async (): Promise<Platform[]> => {
   const stored = localStorage.getItem('platforms');
   if (stored) {
     try {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      // Only return if we have platforms, otherwise try GitHub again
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
     } catch {
-      return defaultPlatforms;
+      // Invalid JSON, continue to default
     }
   }
+  
+  // Last resort: use defaults
   localStorage.setItem('platforms', JSON.stringify(defaultPlatforms));
   return defaultPlatforms;
 };

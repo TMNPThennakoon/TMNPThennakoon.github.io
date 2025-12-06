@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, ArrowRight, Eye } from 'lucide-react'
+import { ExternalLink, ArrowRight } from 'lucide-react'
 import { convertImageUrl, getGoogleDriveAlternatives } from '@/lib/imageUtils'
 
 interface PlatformCardProps {
@@ -14,11 +14,9 @@ interface PlatformCardProps {
     imageUrl: string
     category: string
   }
-  viewCount?: number
-  onView?: () => void
 }
 
-export default function PlatformCard({ platform, viewCount = 0, onView }: PlatformCardProps) {
+export default function PlatformCard({ platform }: PlatformCardProps) {
   // Convert image URL (especially for Google Drive)
   const processedImageUrl = platform.imageUrl ? convertImageUrl(platform.imageUrl) : ''
   
@@ -74,11 +72,8 @@ export default function PlatformCard({ platform, viewCount = 0, onView }: Platfo
         transition: { duration: 0.3 }
       }}
       whileTap={{ scale: 0.97 }}
-      className="bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden cursor-pointer group h-full flex flex-col border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300 relative"
-      onClick={() => {
-        if (onView) onView()
-        window.open(platform.url, '_blank')
-      }}
+      className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer group h-full flex flex-col border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 relative"
+      onClick={() => window.open(platform.url, '_blank')}
     >
       {/* Shimmer effect on hover */}
       <motion.div
@@ -105,7 +100,7 @@ export default function PlatformCard({ platform, viewCount = 0, onView }: Platfo
       
       {/* Image */}
       <div className="relative h-56 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
-        {!currentImageUrl || currentImageUrl.startsWith('/') || currentImageUrl.startsWith('file://') || imageError ? (
+        {!currentImageUrl || currentImageUrl.startsWith('/') || imageError ? (
           <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
             <span className="text-white text-4xl font-bold opacity-50">
               {platform.name.charAt(0)}
@@ -175,7 +170,7 @@ export default function PlatformCard({ platform, viewCount = 0, onView }: Platfo
       <div className="p-6 flex-1 flex flex-col relative z-10">
         <div className="flex items-start justify-between mb-3">
           <motion.h3 
-            className="text-xl font-bold text-gray-100 group-hover:text-blue-400 transition-colors flex-1 pr-2 line-clamp-2"
+            className="text-xl font-bold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1 pr-2 line-clamp-2"
             whileHover={{ scale: 1.02 }}
           >
             {platform.name}
@@ -186,32 +181,20 @@ export default function PlatformCard({ platform, viewCount = 0, onView }: Platfo
           >
             <ExternalLink
               size={20}
-              className="text-gray-400 group-hover:text-blue-400 transition-colors flex-shrink-0 mt-1"
+              className="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-shrink-0 mt-1"
             />
           </motion.div>
         </div>
         
-        <div className="flex items-center gap-2 mb-4 flex-wrap">
-          <motion.span 
-            className="inline-block px-3 py-1.5 text-xs font-semibold text-blue-400 bg-blue-500/20 rounded-full border border-blue-500/30"
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
-          >
-            {platform.category}
-          </motion.span>
-          {viewCount > 0 && (
-            <motion.div
-              className="flex items-center gap-1 px-2 py-1 text-xs text-gray-400 bg-gray-800/50 rounded-full border border-gray-700/50"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <Eye size={12} />
-              <span>{viewCount}</span>
-            </motion.div>
-          )}
-        </div>
+        <motion.span 
+          className="inline-block px-3 py-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50 rounded-full mb-4 border border-blue-200 dark:border-blue-800"
+          whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+        >
+          {platform.category}
+        </motion.span>
         
         <motion.p 
-          className="text-gray-300 text-sm mb-6 line-clamp-3 flex-1"
+          className="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-3 flex-1"
           initial={{ opacity: 0.8 }}
           whileHover={{ opacity: 1 }}
         >
@@ -220,10 +203,10 @@ export default function PlatformCard({ platform, viewCount = 0, onView }: Platfo
 
         <motion.div
           whileHover={{ x: 8 }}
-          className="flex items-center justify-between mt-auto pt-4 border-t border-gray-700/50 group-hover:border-blue-500/50 transition-colors"
+          className="flex items-center justify-between mt-auto pt-4 border-t border-gray-200 dark:border-gray-700 group-hover:border-blue-300 dark:group-hover:border-blue-600 transition-colors"
         >
           <motion.span 
-            className="text-blue-400 font-semibold text-sm"
+            className="text-blue-600 dark:text-blue-400 font-semibold text-sm"
             whileHover={{ scale: 1.05 }}
           >
             Open Platform
@@ -236,7 +219,7 @@ export default function PlatformCard({ platform, viewCount = 0, onView }: Platfo
               ease: "easeInOut"
             }}
           >
-            <ArrowRight size={18} className="text-blue-400" />
+            <ArrowRight size={18} className="text-blue-600 dark:text-blue-400" />
           </motion.div>
         </motion.div>
       </div>

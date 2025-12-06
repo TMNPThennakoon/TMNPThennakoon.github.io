@@ -57,7 +57,14 @@ export default function AdminPage() {
       // Load view counts
       const storedViews = localStorage.getItem('platform_views')
       if (storedViews) {
-        setViewCounts(JSON.parse(storedViews))
+        try {
+          const parsed = JSON.parse(storedViews) as Record<string, number>
+          if (parsed && typeof parsed === 'object' && parsed !== null) {
+            setViewCounts(parsed)
+          }
+        } catch (e) {
+          // Invalid JSON, ignore
+        }
       }
       
       // Load GitHub config
@@ -114,6 +121,15 @@ export default function AdminPage() {
   }
 
   const handleAddPlatform = async (platformData: Omit<Platform, 'id' | 'createdAt'>) => {
+    // Validate image URL is publicly accessible
+    if (platformData.imageUrl && (
+      platformData.imageUrl.startsWith('file://') || 
+      (platformData.imageUrl.startsWith('/') && !platformData.imageUrl.startsWith('http'))
+    )) {
+      alert('⚠️ Image URL must be publicly accessible!\n\nLocal file paths won\'t work on other devices.\n\nPlease use:\n- Image hosting services (Imgur, Cloudinary, etc.)\n- Google Drive with "Anyone with link can view"\n- Direct HTTPS image URLs')
+      return
+    }
+    
     addPlatform(platformData)
     const updatedPlatforms = getPlatformsSync()
     setPlatforms(updatedPlatforms)
@@ -121,7 +137,17 @@ export default function AdminPage() {
     
     // Auto-sync to GitHub
     if (gitHubConfig) {
-      await syncToGitHub(updatedPlatforms, 'create')
+      const syncResult = await syncToGitHub(updatedPlatforms, 'create')
+      if (syncResult.success) {
+        // Show success message
+        setSyncStatus({
+          syncing: false,
+          lastSync: new Date().toLocaleTimeString(),
+          error: null
+        })
+      }
+    } else {
+      alert('⚠️ GitHub sync not configured!\n\nPlatforms will only be visible on this device.\n\nPlease configure GitHub sync in the settings to enable cross-device sync.')
     }
   }
 
@@ -260,8 +286,10 @@ export default function AdminPage() {
   }
 
   // Sync to GitHub function
-  const syncToGitHub = async (platformsToSync: Platform[], action: 'create' | 'update' | 'delete' = 'update') => {
-    if (!gitHubConfig) return
+  const syncToGitHub = async (platformsToSync: Platform[], action: 'create' | 'update' | 'delete' = 'update'): Promise<{ success: boolean; message: string }> => {
+    if (!gitHubConfig) {
+      return { success: false, message: 'GitHub sync not configured' }
+    }
 
     setSyncStatus({ syncing: true, lastSync: null, error: null })
     
@@ -274,19 +302,23 @@ export default function AdminPage() {
           lastSync: new Date().toLocaleTimeString(),
           error: null,
         })
+        return { success: true, message: result.message }
       } else {
         setSyncStatus({
           syncing: false,
           lastSync: null,
           error: result.message,
         })
+        return { success: false, message: result.message }
       }
     } catch (error: any) {
+      const errorMessage = error.message || 'Failed to sync to GitHub'
       setSyncStatus({
         syncing: false,
         lastSync: null,
-        error: error.message || 'Failed to sync to GitHub',
+        error: errorMessage,
       })
+      return { success: false, message: errorMessage }
     }
   }
 

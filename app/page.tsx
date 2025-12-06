@@ -73,12 +73,25 @@ export default function Home() {
     const initialPlatforms = getPlatformsSync()
     setPlatforms(initialPlatforms)
     
-    // Then try to load from GitHub
+    // Function to load platforms from GitHub
     const loadPlatforms = async () => {
       const loadedPlatforms = await getPlatforms()
       setPlatforms(loadedPlatforms)
     }
+    
+    // Load from GitHub immediately
     loadPlatforms()
+    
+    // Periodically check for updates from GitHub (every 5 seconds)
+    const platformsInterval = setInterval(() => {
+      loadPlatforms()
+    }, 5000)
+    
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('hashchange', checkHash)
+      clearInterval(platformsInterval)
+    }
 
     // Load view counts from localStorage
     const storedViews = localStorage.getItem('platform_views')
