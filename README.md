@@ -101,13 +101,22 @@ The dashboard comes with two pre-configured platforms:
 
 ## Deployment
 
-This project can be deployed to:
-- Vercel (recommended for Next.js)
-- Netlify
-- GitHub Pages (using `.github.io` repository)
-- Any Node.js hosting service
+This project is configured to be hosted at **nayana.top**.
 
-Make sure to set up your custom domain (`nayana.top`) in your hosting provider's settings.
+### Quick Deploy
+
+**Recommended: Vercel** (Best for Next.js)
+1. Push code to GitHub
+2. Import project in [Vercel](https://vercel.com)
+3. Add custom domain: `nayana.top`
+4. Deploy automatically
+
+**Detailed deployment instructions:** See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete setup guide including:
+- Vercel deployment
+- Netlify deployment
+- GitHub Pages setup
+- DNS configuration
+- Domain setup for nayana.top
 
 ## Repository
 
