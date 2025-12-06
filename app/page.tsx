@@ -96,7 +96,15 @@ export default function Home() {
     // Load view counts from localStorage
     const storedViews = localStorage.getItem('platform_views')
     if (storedViews) {
-      setViewCounts(JSON.parse(storedViews))
+      try {
+        // Use non-null assertion since we've already checked storedViews is not null
+        const parsed = JSON.parse(storedViews!) as Record<string, number>
+        if (parsed && typeof parsed === 'object' && parsed !== null) {
+          setViewCounts(parsed)
+        }
+      } catch (e) {
+        // Invalid JSON, ignore
+      }
     }
 
     return () => {
@@ -415,14 +423,7 @@ export default function Home() {
                   className="h-full"
                 >
                   <PlatformCard 
-                    platform={platform} 
-                    viewCount={viewCounts[platform.id] || 0}
-                    onView={() => {
-                      const newCounts = { ...viewCounts }
-                      newCounts[platform.id] = (newCounts[platform.id] || 0) + 1
-                      setViewCounts(newCounts)
-                      localStorage.setItem('platform_views', JSON.stringify(newCounts))
-                    }}
+                    platform={platform}
                   />
                 </motion.div>
               ))}
@@ -489,14 +490,7 @@ export default function Home() {
                   className="h-full"
                 >
                   <PlatformCard 
-                    platform={platform} 
-                    viewCount={viewCounts[platform.id] || 0}
-                    onView={() => {
-                      const newCounts = { ...viewCounts }
-                      newCounts[platform.id] = (newCounts[platform.id] || 0) + 1
-                      setViewCounts(newCounts)
-                      localStorage.setItem('platform_views', JSON.stringify(newCounts))
-                    }}
+                    platform={platform}
                   />
                 </motion.div>
               ))}
