@@ -137,15 +137,8 @@ export default function AdminPage() {
     
     // Auto-sync to GitHub
     if (gitHubConfig) {
-      const syncResult = await syncToGitHub(updatedPlatforms, 'create')
-      if (syncResult.success) {
-        // Show success message
-        setSyncStatus({
-          syncing: false,
-          lastSync: new Date().toLocaleTimeString(),
-          error: null
-        })
-      }
+      // Sync will show status automatically via syncStatus state
+      await syncToGitHub(updatedPlatforms, 'create')
     } else {
       alert('⚠️ GitHub sync not configured!\n\nPlatforms will only be visible on this device.\n\nPlease configure GitHub sync in the settings to enable cross-device sync.')
     }

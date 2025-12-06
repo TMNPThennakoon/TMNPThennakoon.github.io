@@ -81,7 +81,8 @@ const getFileContent = async (config: GitHubConfig): Promise<GitHubFileContent |
 export const commitToGitHub = async (
   content: string,
   message: string = 'Update platforms data',
-  retryOnConflict: boolean = true
+  retryCount: number = 0,
+  maxRetries: number = 3
 ): Promise<boolean> => {
   const config = getGitHubConfig()
   if (!config) {
@@ -89,7 +90,6 @@ export const commitToGitHub = async (
   }
 
   try {
-    // Get existing file to get SHA (for update) or create new
     // Always fetch fresh SHA right before committing to avoid conflicts
     const existingFile = await getFileContent(config)
     const encodedContent = encodeBase64(content)
@@ -121,11 +121,12 @@ export const commitToGitHub = async (
       const errorData = await response.json()
       
       // Handle 409 Conflict - file was updated, retry with latest SHA
-      if (response.status === 409 && retryOnConflict) {
-        console.log('409 Conflict detected, retrying with latest SHA...')
-        // Wait a bit and retry once with fresh SHA
-        await new Promise(resolve => setTimeout(resolve, 500))
-        return commitToGitHub(content, message, false) // Retry once without infinite loop
+      if (response.status === 409 && retryCount < maxRetries) {
+        console.log(`409 Conflict detected (attempt ${retryCount + 1}/${maxRetries}), fetching latest SHA and retrying...`)
+        // Wait a bit longer for each retry to allow GitHub to process
+        await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)))
+        // Retry with incremented counter
+        return commitToGitHub(content, message, retryCount + 1, maxRetries)
       }
       
       throw new Error(`GitHub API error: ${response.status} - ${errorData.message || response.statusText}`)
