@@ -83,7 +83,7 @@ export const savePlatforms = (platforms: Platform[]): void => {
 };
 
 export const addPlatform = (platform: Omit<Platform, 'id' | 'createdAt'>): Platform => {
-  const platforms = getPlatforms();
+  const platforms = getPlatformsSync();
   const newPlatform: Platform = {
     ...platform,
     id: `platform-${Date.now()}`,
@@ -95,7 +95,7 @@ export const addPlatform = (platform: Omit<Platform, 'id' | 'createdAt'>): Platf
 };
 
 export const updatePlatform = (id: string, updates: Partial<Platform>): Platform | null => {
-  const platforms = getPlatforms();
+  const platforms = getPlatformsSync();
   const index = platforms.findIndex(p => p.id === id);
   if (index === -1) return null;
   platforms[index] = { ...platforms[index], ...updates };
@@ -104,7 +104,7 @@ export const updatePlatform = (id: string, updates: Partial<Platform>): Platform
 };
 
 export const deletePlatform = (id: string): boolean => {
-  const platforms = getPlatforms();
+  const platforms = getPlatformsSync();
   const filtered = platforms.filter(p => p.id !== id);
   if (filtered.length === platforms.length) return false;
   savePlatforms(filtered);

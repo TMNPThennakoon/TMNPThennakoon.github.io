@@ -119,12 +119,13 @@ export const saveSettings = async (settings: DashboardSettings, syncToGitHub: bo
 }
 
 // Update specific setting
-export const updateSetting = <K extends keyof DashboardSettings>(
+export const updateSetting = async <K extends keyof DashboardSettings>(
   key: K,
-  value: DashboardSettings[K]
-): void => {
-  const settings = getSettings()
+  value: DashboardSettings[K],
+  syncToGitHub: boolean = true
+): Promise<{ success: boolean; message: string }> => {
+  const settings = getSettingsSync()
   settings[key] = value
-  saveSettings(settings)
+  return await saveSettings(settings, syncToGitHub)
 }
 

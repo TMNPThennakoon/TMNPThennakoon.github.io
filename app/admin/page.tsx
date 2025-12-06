@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { getPlatforms, addPlatform, updatePlatform, deletePlatform, savePlatforms, type Platform } from '@/lib/platforms'
+import { getPlatforms, getPlatformsSync, addPlatform, updatePlatform, deletePlatform, savePlatforms, type Platform } from '@/lib/platforms'
 import AdminPlatformCard from '@/components/AdminPlatformCard'
 import AddPlatformModal from '@/components/AddPlatformModal'
 import AdminLogin from '@/components/AdminLogin'
@@ -94,7 +94,16 @@ export default function AdminPage() {
     // Clear hash access flag after successful login
     sessionStorage.removeItem('admin_hash_access')
     setIsAuthenticated(true)
-    setPlatforms(getPlatforms())
+    // Load platforms synchronously first, then async from GitHub
+    const initialPlatforms = getPlatformsSync()
+    setPlatforms(initialPlatforms)
+    
+    // Then try to load from GitHub
+    const loadPlatforms = async () => {
+      const loadedPlatforms = await getPlatforms()
+      setPlatforms(loadedPlatforms)
+    }
+    loadPlatforms()
   }
 
   const handleLogout = () => {
@@ -106,7 +115,7 @@ export default function AdminPage() {
 
   const handleAddPlatform = async (platformData: Omit<Platform, 'id' | 'createdAt'>) => {
     addPlatform(platformData)
-    const updatedPlatforms = getPlatforms()
+    const updatedPlatforms = getPlatformsSync()
     setPlatforms(updatedPlatforms)
     setShowAddModal(false)
     
@@ -118,7 +127,7 @@ export default function AdminPage() {
 
   const handleUpdatePlatform = async (id: string, updates: Partial<Platform>) => {
     updatePlatform(id, updates)
-    const updatedPlatforms = getPlatforms()
+    const updatedPlatforms = getPlatformsSync()
     setPlatforms(updatedPlatforms)
     setEditingPlatform(null)
     
@@ -131,7 +140,7 @@ export default function AdminPage() {
   const handleDeletePlatform = async (id: string) => {
     if (confirm('Are you sure you want to delete this platform?')) {
       deletePlatform(id)
-      const updatedPlatforms = getPlatforms()
+      const updatedPlatforms = getPlatformsSync()
       setPlatforms(updatedPlatforms)
       setSelectedPlatforms(prev => {
         const newSet = new Set(prev)
@@ -155,7 +164,7 @@ export default function AdminPage() {
     if (selectedPlatforms.size === 0) return
     if (confirm(`Are you sure you want to delete ${selectedPlatforms.size} platform(s)?`)) {
       selectedPlatforms.forEach(id => deletePlatform(id))
-      const updatedPlatforms = getPlatforms()
+      const updatedPlatforms = getPlatformsSync()
       setPlatforms(updatedPlatforms)
       setSelectedPlatforms(new Set())
       
@@ -174,7 +183,7 @@ export default function AdminPage() {
     selectedPlatforms.forEach(id => {
       updatePlatform(id, { featured: newFeaturedState })
     })
-    const updatedPlatforms = getPlatforms()
+    const updatedPlatforms = getPlatformsSync()
     setPlatforms(updatedPlatforms)
     setSelectedPlatforms(new Set())
     
@@ -210,7 +219,7 @@ export default function AdminPage() {
           if (Array.isArray(imported)) {
             if (confirm(`Import ${imported.length} platform(s)? This will replace all existing platforms.`)) {
               savePlatforms(imported)
-              const updatedPlatforms = getPlatforms()
+              const updatedPlatforms = getPlatformsSync()
               setPlatforms(updatedPlatforms)
               
               // Auto-sync to GitHub
