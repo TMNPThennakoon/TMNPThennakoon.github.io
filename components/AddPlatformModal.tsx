@@ -191,7 +191,15 @@ export default function AddPlatformModal({ platform, onClose, onSave }: AddPlatf
               <input
                 type="url"
                 value={formData.imageUrl}
-                onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                onChange={(e) => {
+                  const url = e.target.value.trim()
+                  // Validate URL is publicly accessible (not local file paths)
+                  if (url && (url.startsWith('file://') || (url.startsWith('/') && !url.startsWith('http')))) {
+                    alert('⚠️ Please use a publicly accessible image URL.\n\nLocal file paths won\'t work on other devices.\n\nUse:\n- Image hosting: Imgur, Cloudinary, etc.\n- Google Drive: Set to "Anyone with link can view"\n- Direct HTTPS image URLs')
+                    return
+                  }
+                  setFormData({ ...formData, imageUrl: url })
+                }}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="https://example.com/image.jpg or Google Drive link"
               />

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Search, Filter, SortAsc, X } from 'lucide-react'
 import { getPlatforms, type Platform } from '@/lib/platforms'
-import { getSettings } from '@/lib/settings'
+import { getSettings, getSettingsSync } from '@/lib/settings'
 import PlatformCard from '@/components/PlatformCard'
 import BackgroundAnimation from '@/components/BackgroundAnimation'
 import Footer from '@/components/Footer'
@@ -20,19 +20,28 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [sortBy, setSortBy] = useState<SortOption>('name')
   const [viewCounts, setViewCounts] = useState<Record<string, number>>({})
-  const [settings, setSettings] = useState(getSettings())
+  const [settings, setSettings] = useState(getSettingsSync())
   const router = useRouter()
 
-  // Reload settings when they change
+  // Load settings from GitHub on mount and reload when they change
   useEffect(() => {
+    const loadSettings = async () => {
+      const loadedSettings = await getSettings()
+      setSettings(loadedSettings)
+    }
+    
+    loadSettings()
+    
     const handleStorageChange = () => {
-      setSettings(getSettings())
+      loadSettings()
     }
     window.addEventListener('storage', handleStorageChange)
-    // Also check periodically for local changes
+    
+    // Check for settings updates periodically
     const interval = setInterval(() => {
-      setSettings(getSettings())
-    }, 1000)
+      loadSettings()
+    }, 2000)
+    
     return () => {
       window.removeEventListener('storage', handleStorageChange)
       clearInterval(interval)
@@ -60,9 +69,16 @@ export default function Home() {
     // Listen for hash changes
     window.addEventListener('hashchange', checkHash)
 
-    // Load platforms
-    const loadedPlatforms = getPlatforms()
-    setPlatforms(loadedPlatforms)
+    // Load platforms (sync for initial render, then async from GitHub)
+    const initialPlatforms = getPlatformsSync()
+    setPlatforms(initialPlatforms)
+    
+    // Then try to load from GitHub
+    const loadPlatforms = async () => {
+      const loadedPlatforms = await getPlatforms()
+      setPlatforms(loadedPlatforms)
+    }
+    loadPlatforms()
 
     // Load view counts from localStorage
     const storedViews = localStorage.getItem('platform_views')

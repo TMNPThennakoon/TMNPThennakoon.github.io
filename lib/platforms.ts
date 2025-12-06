@@ -33,14 +33,47 @@ export const defaultPlatforms: Platform[] = [
   },
 ];
 
-// Store platforms in localStorage (in production, use a database)
-export const getPlatforms = (): Platform[] => {
+// Store platforms in localStorage (with GitHub sync support)
+export const getPlatforms = async (): Promise<Platform[]> => {
+  if (typeof window === 'undefined') return defaultPlatforms;
+  
+  // Try to load from GitHub first if configured
+  try {
+    const { loadPlatformsFromGitHub } = await import('./githubSync');
+    const result = await loadPlatformsFromGitHub();
+    if (result.success && result.platforms && result.platforms.length > 0) {
+      // Save to localStorage and return
+      localStorage.setItem('platforms', JSON.stringify(result.platforms));
+      return result.platforms;
+    }
+  } catch (error) {
+    console.log('Loading platforms from GitHub failed, using localStorage:', error);
+  }
+  
+  // Fallback to localStorage
+  const stored = localStorage.getItem('platforms');
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch {
+      return defaultPlatforms;
+    }
+  }
+  localStorage.setItem('platforms', JSON.stringify(defaultPlatforms));
+  return defaultPlatforms;
+};
+
+// Get platforms synchronously from localStorage (for initial render)
+export const getPlatformsSync = (): Platform[] => {
   if (typeof window === 'undefined') return defaultPlatforms;
   const stored = localStorage.getItem('platforms');
   if (stored) {
-    return JSON.parse(stored);
+    try {
+      return JSON.parse(stored);
+    } catch {
+      return defaultPlatforms;
+    }
   }
-  localStorage.setItem('platforms', JSON.stringify(defaultPlatforms));
   return defaultPlatforms;
 };
 

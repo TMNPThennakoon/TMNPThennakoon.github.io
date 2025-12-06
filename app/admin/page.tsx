@@ -44,8 +44,15 @@ export default function AdminPage() {
     if (hashAccess === 'true' && storedAuth === 'true') {
       // User has hash access and is authenticated
       setIsAuthenticated(true)
-      const loadedPlatforms = getPlatforms()
-      setPlatforms(loadedPlatforms)
+      const initialPlatforms = getPlatformsSync()
+      setPlatforms(initialPlatforms)
+      
+      // Load from GitHub if available
+      const loadPlatforms = async () => {
+        const loadedPlatforms = await getPlatforms()
+        setPlatforms(loadedPlatforms)
+      }
+      loadPlatforms()
       
       // Load view counts
       const storedViews = localStorage.getItem('platform_views')
@@ -343,18 +350,18 @@ export default function AdminPage() {
                 <Settings size={18} />
                 Settings
               </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setEditingPlatform(null)
-                  setShowAddModal(true)
-                }}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                setEditingPlatform(null)
+                setShowAddModal(true)
+              }}
                 className="flex items-center gap-2 px-6 py-2 bg-blue-600/80 backdrop-blur-xl text-white rounded-lg hover:bg-blue-700/80 border border-blue-500/50 transition-colors shadow-lg font-semibold"
-              >
+            >
                 <Plus size={18} />
                 Add Platform
-              </motion.button>
+            </motion.button>
             </div>
           </div>
 

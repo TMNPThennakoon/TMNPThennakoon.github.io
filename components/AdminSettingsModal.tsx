@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Settings, Palette, Type, Image as ImageIcon, Zap } from 'lucide-react'
-import { getSettings, saveSettings, type DashboardSettings } from '@/lib/settings'
+import { X, Settings, Palette, Type, Image as ImageIcon, Zap, CheckCircle, AlertCircle, Loader } from 'lucide-react'
+import { getSettingsSync, saveSettings, type DashboardSettings } from '@/lib/settings'
 
 interface AdminSettingsModalProps {
   isOpen: boolean
@@ -15,16 +15,38 @@ export default function AdminSettingsModal({ isOpen, onClose, onSave }: AdminSet
   const [settings, setSettings] = useState<DashboardSettings>(getSettings())
   const [activeTab, setActiveTab] = useState<'branding' | 'sections' | 'background' | 'animations'>('branding')
 
+  const [saving, setSaving] = useState(false)
+  const [saveMessage, setSaveMessage] = useState<{ success: boolean; message: string } | null>(null)
+
   useEffect(() => {
     if (isOpen) {
-      setSettings(getSettings())
+      setSettings(getSettingsSync())
+      setSaveMessage(null)
     }
   }, [isOpen])
 
-  const handleSave = () => {
-    saveSettings(settings)
-    onSave()
-    onClose()
+  const handleSave = async () => {
+    setSaving(true)
+    setSaveMessage(null)
+    
+    try {
+      const result = await saveSettings(settings, true)
+      setSaveMessage(result)
+      
+      if (result.success) {
+        setTimeout(() => {
+          onSave()
+          onClose()
+        }, 1000)
+      }
+    } catch (error: any) {
+      setSaveMessage({
+        success: false,
+        message: `Error: ${error.message}`
+      })
+    } finally {
+      setSaving(false)
+    }
   }
 
   const tabs = [

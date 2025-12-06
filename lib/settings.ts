@@ -44,9 +44,25 @@ export const defaultSettings: DashboardSettings = {
   secondaryColor: '#8b5cf6',
 }
 
-// Get settings from localStorage
-export const getSettings = (): DashboardSettings => {
+// Get settings from localStorage (with GitHub sync support)
+export const getSettings = async (): Promise<DashboardSettings> => {
   if (typeof window === 'undefined') return defaultSettings
+  
+  // Try to load from GitHub first if configured
+  try {
+    const { loadSettingsFromGitHub } = await import('./githubSync')
+    const result = await loadSettingsFromGitHub()
+    if (result.success && result.settings) {
+      // Merge with defaults and save to localStorage
+      const mergedSettings = { ...defaultSettings, ...result.settings }
+      localStorage.setItem('dashboard_settings', JSON.stringify(mergedSettings))
+      return mergedSettings
+    }
+  } catch (error) {
+    console.log('Loading from GitHub failed, using localStorage:', error)
+  }
+  
+  // Fallback to localStorage
   const stored = localStorage.getItem('dashboard_settings')
   if (stored) {
     try {
@@ -59,10 +75,47 @@ export const getSettings = (): DashboardSettings => {
   return defaultSettings
 }
 
-// Save settings to localStorage
-export const saveSettings = (settings: DashboardSettings): void => {
-  if (typeof window === 'undefined') return
+// Get settings synchronously from localStorage (for initial render)
+export const getSettingsSync = (): DashboardSettings => {
+  if (typeof window === 'undefined') return defaultSettings
+  const stored = localStorage.getItem('dashboard_settings')
+  if (stored) {
+    try {
+      return { ...defaultSettings, ...JSON.parse(stored) }
+    } catch {
+      return defaultSettings
+    }
+  }
+  return defaultSettings
+}
+
+// Save settings to localStorage and optionally sync to GitHub
+export const saveSettings = async (settings: DashboardSettings, syncToGitHub: boolean = true): Promise<{ success: boolean; message: string }> => {
+  if (typeof window === 'undefined') {
+    return { success: false, message: 'Cannot save settings in server environment' }
+  }
+  
+  // Save to localStorage first
   localStorage.setItem('dashboard_settings', JSON.stringify(settings))
+  
+  // Sync to GitHub if configured
+  if (syncToGitHub) {
+    try {
+      const { syncSettingsToGitHub } = await import('./githubSync')
+      const result = await syncSettingsToGitHub(settings)
+      return result
+    } catch (error: any) {
+      return {
+        success: false,
+        message: `Settings saved locally but GitHub sync failed: ${error.message}`
+      }
+    }
+  }
+  
+  return {
+    success: true,
+    message: 'Settings saved successfully'
+  }
 }
 
 // Update specific setting

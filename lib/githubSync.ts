@@ -200,3 +200,146 @@ export const syncPlatformsToGitHub = async (
   }
 }
 
+// Sync settings to GitHub
+export const syncSettingsToGitHub = async (
+  settings: any
+): Promise<{ success: boolean; message: string }> => {
+  try {
+    const config = getGitHubConfig()
+    if (!config) {
+      return {
+        success: false,
+        message: 'GitHub configuration not found. Settings saved locally only.'
+      }
+    }
+
+    // Use settings file path (default to data/settings.json)
+    const settingsFilePath = config.filePath.replace('platforms.json', 'settings.json')
+    const settingsConfig = { ...config, filePath: settingsFilePath }
+    
+    const settingsJson = JSON.stringify(settings, null, 2)
+    const timestamp = new Date().toISOString()
+    const commitMessage = `Update dashboard settings - ${timestamp}`
+
+    // Get existing file
+    const existingFile = await getFileContent(settingsConfig)
+    const encodedContent = encodeBase64(settingsJson)
+
+    const url = `https://api.github.com/repos/${settingsConfig.owner}/${settingsConfig.repo}/contents/${settingsConfig.filePath}`
+    
+    const body: any = {
+      message: commitMessage,
+      content: encodedContent,
+      branch: settingsConfig.branch,
+    }
+
+    if (existingFile?.sha) {
+      body.sha = existingFile.sha
+    }
+
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${settingsConfig.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(`GitHub API error: ${response.status} - ${errorData.message || response.statusText}`)
+    }
+
+    return {
+      success: true,
+      message: `Successfully synced settings to GitHub: ${commitMessage}`
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      message: `Failed to sync settings to GitHub: ${error.message}`
+    }
+  }
+}
+
+// Load settings from GitHub
+export const loadSettingsFromGitHub = async (): Promise<{ success: boolean; settings: any | null; message: string }> => {
+  try {
+    const config = getGitHubConfig()
+    if (!config) {
+      return {
+        success: false,
+        settings: null,
+        message: 'GitHub configuration not found'
+      }
+    }
+
+    const settingsFilePath = config.filePath.replace('platforms.json', 'settings.json')
+    const settingsConfig = { ...config, filePath: settingsFilePath }
+    
+    const fileContent = await getFileContent(settingsConfig)
+    
+    if (!fileContent || !fileContent.content) {
+      return {
+        success: false,
+        settings: null,
+        message: 'Settings file not found on GitHub'
+      }
+    }
+
+    const settings = JSON.parse(fileContent.content)
+    
+    return {
+      success: true,
+      settings,
+      message: 'Settings loaded from GitHub'
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      settings: null,
+      message: `Failed to load settings from GitHub: ${error.message}`
+    }
+  }
+}
+
+// Load platforms from GitHub
+export const loadPlatformsFromGitHub = async (): Promise<{ success: boolean; platforms: any[] | null; message: string }> => {
+  try {
+    const config = getGitHubConfig()
+    if (!config) {
+      return {
+        success: false,
+        platforms: null,
+        message: 'GitHub configuration not found'
+      }
+    }
+    
+    const fileContent = await getFileContent(config)
+    
+    if (!fileContent || !fileContent.content) {
+      return {
+        success: false,
+        platforms: null,
+        message: 'Platforms file not found on GitHub'
+      }
+    }
+
+    const platforms = JSON.parse(fileContent.content)
+    
+    return {
+      success: true,
+      platforms: Array.isArray(platforms) ? platforms : [],
+      message: 'Platforms loaded from GitHub'
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      platforms: null,
+      message: `Failed to load platforms from GitHub: ${error.message}`
+    }
+  }
+}
+
