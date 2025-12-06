@@ -9,7 +9,7 @@ import AddPlatformModal from '@/components/AddPlatformModal'
 import AdminLogin from '@/components/AdminLogin'
 import BackgroundAnimation from '@/components/BackgroundAnimation'
 import FloatingParticles from '@/components/FloatingParticles'
-import { ArrowLeft, Plus, LogOut, Search, Filter, Download, Upload, Trash2, Star, StarOff, X, BarChart3, Eye, Github, CheckCircle, AlertCircle, Loader } from 'lucide-react'
+import { ArrowLeft, Plus, LogOut, Search, Filter, Download, Upload, Trash2, Star, StarOff, X, Eye, Github, CheckCircle, AlertCircle, Loader } from 'lucide-react'
 import GitHubSyncModal from '@/components/GitHubSyncModal'
 import { getGitHubConfig, syncPlatformsToGitHub } from '@/lib/githubSync'
 
