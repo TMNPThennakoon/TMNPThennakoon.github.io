@@ -80,7 +80,8 @@ const getFileContent = async (config: GitHubConfig): Promise<GitHubFileContent |
 // Commit file to GitHub
 export const commitToGitHub = async (
   content: string,
-  message: string = 'Update platforms data'
+  message: string = 'Update platforms data',
+  retryOnConflict: boolean = true
 ): Promise<boolean> => {
   const config = getGitHubConfig()
   if (!config) {
@@ -89,6 +90,7 @@ export const commitToGitHub = async (
 
   try {
     // Get existing file to get SHA (for update) or create new
+    // Always fetch fresh SHA right before committing to avoid conflicts
     const existingFile = await getFileContent(config)
     const encodedContent = encodeBase64(content)
 
@@ -117,6 +119,15 @@ export const commitToGitHub = async (
 
     if (!response.ok) {
       const errorData = await response.json()
+      
+      // Handle 409 Conflict - file was updated, retry with latest SHA
+      if (response.status === 409 && retryOnConflict) {
+        console.log('409 Conflict detected, retrying with latest SHA...')
+        // Wait a bit and retry once with fresh SHA
+        await new Promise(resolve => setTimeout(resolve, 500))
+        return commitToGitHub(content, message, false) // Retry once without infinite loop
+      }
+      
       throw new Error(`GitHub API error: ${response.status} - ${errorData.message || response.statusText}`)
     }
 
@@ -249,7 +260,32 @@ export const syncSettingsToGitHub = async (
 
     if (!response.ok) {
       const errorData = await response.json()
-      throw new Error(`GitHub API error: ${response.status} - ${errorData.message || response.statusText}`)
+      
+      // Handle 409 Conflict - retry with latest SHA
+      if (response.status === 409) {
+        console.log('409 Conflict detected for settings, retrying with latest SHA...')
+        await new Promise(resolve => setTimeout(resolve, 500))
+        // Retry once with fresh SHA
+        const retryFile = await getFileContent(settingsConfig)
+        body.sha = retryFile?.sha
+        
+        const retryResponse = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${settingsConfig.token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        })
+        
+        if (!retryResponse.ok) {
+          const retryErrorData = await retryResponse.json()
+          throw new Error(`GitHub API error: ${retryResponse.status} - ${retryErrorData.message || retryResponse.statusText}`)
+        }
+      } else {
+        throw new Error(`GitHub API error: ${response.status} - ${errorData.message || response.statusText}`)
+      }
     }
 
     return {
