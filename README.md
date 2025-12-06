@@ -11,6 +11,7 @@ A modern, feature-rich dashboard for managing and accessing multiple platforms a
 - ✨ **Animations** - Smooth transitions and interactions with Framer Motion
 - 🌟 **Three.js Background** - Animated 3D background effects
 - 🖼️ **Image Support** - Add sample images and descriptions for each platform
+- 🔄 **GitHub Auto-Sync** - Automatically sync platform changes to GitHub repository
 
 ## Tech Stack
 
@@ -71,6 +72,20 @@ npm start
 - **Feature**: Toggle the star icon to feature/unfeature a platform
 - **Preview**: Click the external link icon to open the platform
 
+### GitHub Auto-Sync
+
+The dashboard includes automatic GitHub synchronization:
+
+1. **Setup GitHub Sync**:
+   - Click "Setup GitHub" in the admin dashboard
+   - Enter your GitHub Personal Access Token
+   - Configure repository details (owner, repo, branch, file path)
+   - Test connection and save
+
+2. **Auto-Sync**: All platform changes (add, update, delete) are automatically committed to your GitHub repository
+
+3. **Manual Sync**: Use "Sync Now" button to manually sync platforms
+
 ## Default Platforms
 
 The dashboard comes with two pre-configured platforms:
@@ -89,11 +104,15 @@ The dashboard comes with two pre-configured platforms:
 This project can be deployed to:
 - Vercel (recommended for Next.js)
 - Netlify
+- GitHub Pages (using `.github.io` repository)
 - Any Node.js hosting service
 
 Make sure to set up your custom domain (`nayana.top`) in your hosting provider's settings.
 
+## Repository
+
+This project is hosted at: [https://github.com/TMNPThennakoon/PlatformHub.github.io](https://github.com/TMNPThennakoon/PlatformHub.github.io)
+
 ## License
 
 MIT
-
