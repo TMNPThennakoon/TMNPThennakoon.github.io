@@ -203,7 +203,7 @@ export default function AddPlatformModal({ platform, onClose, onSave }: AddPlatf
                     <Info size={16} className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                     <div className="text-xs text-blue-700 dark:text-blue-300">
                       <p className="font-semibold mb-1">Google Drive Image:</p>
-                      <p>Make sure your Google Drive file is set to "Anyone with the link can view". The system will automatically convert your Google Drive URL to a direct image link.</p>
+                      <p>Make sure your Google Drive file is set to &quot;Anyone with the link can view&quot;. The system will automatically convert your Google Drive URL to a direct image link.</p>
                     </div>
                   </div>
                 </div>

@@ -186,7 +186,7 @@ export default function GitHubSyncModal({ isOpen, onClose, onSave }: GitHubSyncM
                   placeholder="data/platforms.json"
                 />
                 <p className="mt-2 text-xs text-gray-400">
-                  The file will be created automatically if it doesn't exist
+                  The file will be created automatically if it doesn&apos;t exist
                 </p>
               </div>
 

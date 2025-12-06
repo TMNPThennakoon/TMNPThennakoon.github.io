@@ -93,6 +93,7 @@ function DotsPattern() {
       originalPositions[i3 + 1] = y
       originalPositions[i3 + 2] = z
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useFrame((state) => {
@@ -341,6 +342,7 @@ function ConnectingParticles() {
       originalPositions[i3 + 1] = y
       originalPositions[i3 + 2] = z
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useFrame((state) => {
