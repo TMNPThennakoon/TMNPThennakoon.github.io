@@ -1,0 +1,16 @@
+{
+  "dashboardName": "Platform",
+  "dashboardSubtitle": "hub",
+  "dashboardDescription": "Your Gateway to Powerful Tools & Platforms",
+  "featuredSectionTitle": "Featured Platforms",
+  "featuredSectionSubtitle": "Handpicked tools and platforms for you",
+  "allPlatformsSectionTitle": "All Platforms",
+  "allPlatformsSectionSubtitle": "Explore all available tools and platforms",
+  "backgroundStyle": "waves",
+  "animationSpeed": "normal",
+  "animationIntensity": "moderate",
+  "enableParticles": true,
+  "enableFloatingElements": true,
+  "primaryColor": "#3b82f6",
+  "secondaryColor": "#8b5cf6"
+}
