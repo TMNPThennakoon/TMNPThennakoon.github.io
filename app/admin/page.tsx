@@ -9,8 +9,9 @@ import AddPlatformModal from '@/components/AddPlatformModal'
 import AdminLogin from '@/components/AdminLogin'
 import BackgroundAnimation from '@/components/BackgroundAnimation'
 import FloatingParticles from '@/components/FloatingParticles'
-import { ArrowLeft, Plus, LogOut, Search, Filter, Download, Upload, Trash2, Star, StarOff, X, Eye, Github, CheckCircle, AlertCircle, Loader } from 'lucide-react'
+import { ArrowLeft, Plus, LogOut, Search, Filter, Download, Upload, Trash2, Star, StarOff, X, Eye, Github, CheckCircle, AlertCircle, Loader, Settings } from 'lucide-react'
 import GitHubSyncModal from '@/components/GitHubSyncModal'
+import AdminSettingsModal from '@/components/AdminSettingsModal'
 import { getGitHubConfig, syncPlatformsToGitHub } from '@/lib/githubSync'
 
 export default function AdminPage() {
@@ -24,6 +25,7 @@ export default function AdminPage() {
   const [selectedPlatforms, setSelectedPlatforms] = useState<Set<string>>(new Set())
   const [viewCounts, setViewCounts] = useState<Record<string, number>>({})
   const [showGitHubModal, setShowGitHubModal] = useState(false)
+  const [showSettingsModal, setShowSettingsModal] = useState(false)
   const [syncStatus, setSyncStatus] = useState<{ syncing: boolean; lastSync: string | null; error: string | null }>({
     syncing: false,
     lastSync: null,
@@ -332,13 +334,22 @@ export default function AdminPage() {
                 <LogOut size={18} />
                 Logout
               </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setEditingPlatform(null)
-                setShowAddModal(true)
-              }}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowSettingsModal(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600/80 backdrop-blur-xl text-white rounded-lg hover:bg-purple-700/80 border border-purple-500/50 transition-colors font-semibold"
+              >
+                <Settings size={18} />
+                Settings
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setEditingPlatform(null)
+                  setShowAddModal(true)
+                }}
                 className="flex items-center gap-2 px-6 py-2 bg-blue-600/80 backdrop-blur-xl text-white rounded-lg hover:bg-blue-700/80 border border-blue-500/50 transition-colors shadow-lg font-semibold"
               >
                 <Plus size={18} />
@@ -741,6 +752,16 @@ export default function AdminPage() {
           isOpen={showGitHubModal}
           onClose={() => setShowGitHubModal(false)}
           onSave={handleGitHubConfigSave}
+        />
+
+        {/* Admin Settings Modal */}
+        <AdminSettingsModal
+          isOpen={showSettingsModal}
+          onClose={() => setShowSettingsModal(false)}
+          onSave={() => {
+            // Settings saved, trigger reload to apply changes
+            window.location.reload()
+          }}
         />
       </div>
     </main>

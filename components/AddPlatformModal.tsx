@@ -196,14 +196,19 @@ export default function AddPlatformModal({ platform, onClose, onSave }: AddPlatf
                 placeholder="https://example.com/image.jpg or Google Drive link"
               />
               
-              {/* Help Text for Google Drive */}
-              {formData.imageUrl && formData.imageUrl.includes('drive.google.com') && (
+              {/* Help Text for Images */}
+              {formData.imageUrl && (
                 <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                   <div className="flex items-start gap-2">
                     <Info size={16} className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                     <div className="text-xs text-blue-700 dark:text-blue-300">
-                      <p className="font-semibold mb-1">Google Drive Image:</p>
-                      <p>Make sure your Google Drive file is set to &quot;Anyone with the link can view&quot;. The system will automatically convert your Google Drive URL to a direct image link.</p>
+                      <p className="font-semibold mb-1">Image URL Requirements:</p>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Use publicly accessible image URLs (not local file paths)</li>
+                        <li>For Google Drive: Set file to &quot;Anyone with the link can view&quot;</li>
+                        <li>Recommended: Use image hosting services (Imgur, Cloudinary, etc.)</li>
+                        <li>Images must be accessible from any device/browser</li>
+                      </ul>
                     </div>
                   </div>
                 </div>

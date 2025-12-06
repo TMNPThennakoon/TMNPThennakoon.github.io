@@ -427,7 +427,11 @@ function ConnectingParticles() {
   )
 }
 
-export default function BackgroundAnimation() {
+interface BackgroundAnimationProps {
+  backgroundStyle?: 'grid-dots' | 'particles' | 'waves' | 'geometric' | 'minimal'
+}
+
+export default function BackgroundAnimation({ backgroundStyle = 'grid-dots' }: BackgroundAnimationProps) {
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -499,12 +503,40 @@ export default function BackgroundAnimation() {
         <pointLight position={[10, 10, 10]} intensity={0.4} color="#60a5fa" />
         <pointLight position={[-10, -10, -10]} intensity={0.25} color="#8b5cf6" />
         
-        <GridPattern />
-        <DotsPattern />
-        <SquaresPattern />
-        <WireframeStructure />
-        <AdditionalWireframes />
-        <ConnectingParticles />
+        {backgroundStyle === 'grid-dots' && (
+          <>
+            <GridPattern />
+            <DotsPattern />
+            <SquaresPattern />
+            <WireframeStructure />
+            <AdditionalWireframes />
+            <ConnectingParticles />
+          </>
+        )}
+        {backgroundStyle === 'particles' && (
+          <>
+            <DotsPattern />
+            <ConnectingParticles />
+          </>
+        )}
+        {backgroundStyle === 'waves' && (
+          <>
+            <GridPattern />
+            <DotsPattern />
+          </>
+        )}
+        {backgroundStyle === 'geometric' && (
+          <>
+            <WireframeStructure />
+            <AdditionalWireframes />
+            <SquaresPattern />
+          </>
+        )}
+        {backgroundStyle === 'minimal' && (
+          <>
+            <DotsPattern />
+          </>
+        )}
       </Canvas>
     </div>
   )

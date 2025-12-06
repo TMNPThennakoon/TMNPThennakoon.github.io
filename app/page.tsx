@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Search, Filter, SortAsc, X } from 'lucide-react'
 import { getPlatforms, type Platform } from '@/lib/platforms'
+import { getSettings } from '@/lib/settings'
 import PlatformCard from '@/components/PlatformCard'
 import BackgroundAnimation from '@/components/BackgroundAnimation'
 import Footer from '@/components/Footer'
@@ -19,7 +20,24 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [sortBy, setSortBy] = useState<SortOption>('name')
   const [viewCounts, setViewCounts] = useState<Record<string, number>>({})
+  const [settings, setSettings] = useState(getSettings())
   const router = useRouter()
+
+  // Reload settings when they change
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setSettings(getSettings())
+    }
+    window.addEventListener('storage', handleStorageChange)
+    // Also check periodically for local changes
+    const interval = setInterval(() => {
+      setSettings(getSettings())
+    }, 1000)
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+      clearInterval(interval)
+    }
+  }, [])
 
   useEffect(() => {
     // Check for admin access via hash
@@ -98,8 +116,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative bg-black">
-      <BackgroundAnimation />
-      <FloatingParticles />
+      <BackgroundAnimation backgroundStyle={settings.backgroundStyle} />
+      {settings.enableParticles && <FloatingParticles />}
       
       <div className="relative z-20 container mx-auto px-4 py-8">
         {/* Header */}
@@ -141,7 +159,7 @@ export default function Home() {
                   }}
                   className="text-white dark:text-white tracking-tight font-extrabold"
                 >
-                  Platform
+                  {settings.dashboardName}
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, scale: 0.5, x: 50 }}
@@ -189,7 +207,7 @@ export default function Home() {
                       delay: 1.5
                     }}
                   >
-                    hub
+                    {settings.dashboardSubtitle}
                   </motion.span>
                 </motion.span>
               </h1>
@@ -200,21 +218,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
               className="text-xl md:text-2xl text-gray-300 dark:text-gray-300 font-medium"
             >
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.9 }}
-              >
-                Your Gateway to{' '}
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1.1 }}
-                className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-bold"
-              >
-                Powerful Tools & Platforms
-              </motion.span>
+              {settings.dashboardDescription}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -345,7 +349,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                 >
-                  Featured Platforms
+                  {settings.featuredSectionTitle}
                 </motion.h2>
                 <motion.div 
                   className="flex-1 h-1 bg-gradient-to-r from-purple-500 to-transparent rounded-full"
@@ -360,7 +364,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                Handpicked tools and platforms for you
+                {settings.featuredSectionSubtitle}
               </motion.p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -419,7 +423,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                 >
-                  All Platforms
+                  {settings.allPlatformsSectionTitle}
                 </motion.h2>
                 <motion.div 
                   className="flex-1 h-1 bg-gradient-to-r from-purple-500 to-transparent rounded-full"
@@ -434,7 +438,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.1 }}
               >
-                Explore all available tools and platforms
+                {settings.allPlatformsSectionSubtitle}
               </motion.p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
