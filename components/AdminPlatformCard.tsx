@@ -76,7 +76,7 @@ export default function AdminPlatformCard({
     >
       {/* Image */}
       <div className="relative h-56 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500">
-        {!currentImageUrl || currentImageUrl.startsWith('/') || imageError ? (
+        {!currentImageUrl || currentImageUrl.startsWith('/') || currentImageUrl.startsWith('file://') || imageError ? (
           <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
             <span className="text-white text-3xl font-bold opacity-50">
               {platform.name.charAt(0)}

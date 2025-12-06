@@ -12,7 +12,7 @@ interface AdminSettingsModalProps {
 }
 
 export default function AdminSettingsModal({ isOpen, onClose, onSave }: AdminSettingsModalProps) {
-  const [settings, setSettings] = useState<DashboardSettings>(getSettings())
+  const [settings, setSettings] = useState<DashboardSettings>(getSettingsSync())
   const [activeTab, setActiveTab] = useState<'branding' | 'sections' | 'background' | 'animations'>('branding')
 
   const [saving, setSaving] = useState(false)
